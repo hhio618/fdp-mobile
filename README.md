@@ -5,7 +5,8 @@ The project was created using react-native.
 
 ## TODO
 - [X] Creating boilerplate 
-- [X] Adding fdp-storage npm package to dependencies
+- [X] Add fdp-storage npm package to the dependencies
+- [ ] Fix https://github.com/fairDataSociety/fdp-storage/issues/67
 - [ ] Selecting suitable cross-platform filesystem library
 - [ ] Creating the first version of FDPMobile application for iOS and Android
 
