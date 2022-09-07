@@ -17,11 +17,11 @@ const createTheme = <T extends BaseThemeType>(themeObject: T): T => themeObject;
 
 const BaseTheme = {
   colors: {
-    text: '#202124',
-    background: '#fff',
-    primary: '#151522',
-    secondary: '#9c27b0',
-    muted: '#f1f3f4',
+    text: '#fff',
+    background: '#303f9f',
+    primary: '#ef6c00',
+    secondary: '#00897b',
+    muted: '#fff',
 
     // from figma file
 
@@ -80,7 +80,7 @@ export const theme = createTheme({
       fontWeight: 'bold',
       fontSize: 22,
       lineHeight: 42.5,
-      color: 'black',
+      color: 'white',
     },
     subheader: {
       fontFamily: 'Inter',

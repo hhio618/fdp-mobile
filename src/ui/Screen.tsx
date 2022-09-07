@@ -5,13 +5,13 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const Screen = ({children}: Props) => (
+export const Screen = (props: Props) => (
   <View
     justifyContent="center"
     flexDirection="column"
     paddingHorizontal="m"
     flex={1}
     bg="background">
-    {children}
+    {props.children}
   </View>
 );

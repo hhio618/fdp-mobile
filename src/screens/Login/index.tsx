@@ -6,13 +6,15 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 type FormData = {
-  email: string;
+  username: string;
   password: string;
+  url: string;
 };
 
 const schema = yup.object().shape({
-  email: yup.string().required().email(),
+  username: yup.string().required().min(4),
   password: yup.string().required().min(6),
+  url: yup.string().required().min(6),
 });
 
 export const Login = () => {
@@ -28,18 +30,29 @@ export const Login = () => {
   };
   return (
     <Screen>
-      <Input control={control} name="email" label="Email" />
+      <Input
+        control={control}
+        name="username"
+        label="Username"
+        placeholder="FDP username"
+      />
+       <Input
+        control={control}
+        name="url"
+        label="Url"
+        placeholder="https://localhost:6333"
+      />
       <Input
         control={control}
         name="password"
         label="Password"
-        placeholder="***"
+        placeholder="******"
         secureTextEntry={true}
       />
       <Button
         label="Login"
         onPress={handleSubmit(onSubmit)}
-        variant="secondary"
+        variant="primary"
       />
     </Screen>
   );
