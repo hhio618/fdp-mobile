@@ -1,21 +1,25 @@
 import * as React from 'react';
 
-import {StyleSheet, View, Text, Button} from 'react-native';
+import {StyleSheet, View, ScrollView, Text, Button} from 'react-native';
 import DocumentPicker, {
   DirectoryPickerResponse,
   DocumentPickerResponse,
   isInProgress,
-  types,
 } from 'react-native-document-picker';
 import {useEffect} from 'react';
 import {fdp} from 'fdp/client';
 import Toast from 'react-native-toast-message';
+
+// require the module
+const RNFS = require('react-native-fs');
 
 export function Upload() {
   const [result, setResult] =
     React.useState<
       Array<DocumentPickerResponse> | DirectoryPickerResponse | undefined | null
     >();
+
+  const [fileBinaryData, setFileBinaryData] = React.useState<any>();
 
   const showSuccessUploadToast = () => {
     Toast.show({
@@ -35,7 +39,13 @@ export function Upload() {
   useEffect(() => {
     const files = JSON.stringify(result, null, 2);
     if (files && files.length > 0) {
-      const selectedFileInfo: any = files[0];
+      console.log(JSON.parse(files)[0]['uri']);
+      const selectedFileInfo: any = JSON.parse(files)[0];
+      console.log(`file data: ${JSON.stringify(selectedFileInfo)}`);
+      RNFS.readFile(selectedFileInfo['uri'], 'base64').then((fileBin: any) => {
+        console.log(`Bin data: ${fileBin}`);
+        setFileBinaryData(fileBin);
+      });
       try {
         fdp.file
           .uploadData('default', selectedFileInfo['uri'], 'Hooraay!!')
@@ -49,7 +59,7 @@ export function Upload() {
         showFailureUploadToast();
       }
     }
-  }, [result]);
+  }, [result, fileBinaryData]);
 
   const handleError = (err: unknown) => {
     if (DocumentPicker.isCancel(err)) {
@@ -80,7 +90,13 @@ export function Upload() {
           }
         }}
       />
-      <Text style={styles.text} selectable>Result: {JSON.stringify(result, null, 2)}</Text>
+      <Text style={styles.text} selectable>
+        Result: {JSON.stringify(result, null, 2)}
+      </Text>
+      {fileBinaryData && (
+        <Text style={styles.text}>Bin data is loaded into fileBinaryData</Text>
+      )}
+      
     </View>
   );
 }
@@ -98,7 +114,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   text: {
-    color: "white",
-    marginTop: 10
+    color: 'white',
+    marginTop: 10,
   },
 });
