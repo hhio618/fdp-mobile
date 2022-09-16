@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {StyleSheet, View, ScrollView, Text, Button} from 'react-native';
+import {StyleSheet, View, Text, Button} from 'react-native';
 import DocumentPicker, {
   DirectoryPickerResponse,
   DocumentPickerResponse,
@@ -9,6 +9,7 @@ import DocumentPicker, {
 import {useEffect} from 'react';
 import {fdp} from 'fdp/client';
 import Toast from 'react-native-toast-message';
+import { Base64Binary } from 'core/utils';
 
 // require the module
 const RNFS = require('react-native-fs');
@@ -43,8 +44,9 @@ export function Upload() {
       const selectedFileInfo: any = JSON.parse(files)[0];
       console.log(`file data: ${JSON.stringify(selectedFileInfo)}`);
       RNFS.readFile(selectedFileInfo['uri'], 'base64').then((fileBin: any) => {
-        console.log(`Bin data: ${fileBin}`);
-        setFileBinaryData(fileBin);
+        let byteArray = Base64Binary.decodeArrayBuffer(fileBin);
+        console.log(`Bin data: ${byteArray}`);
+        setFileBinaryData(byteArray);
       });
       try {
         fdp.file
@@ -59,7 +61,7 @@ export function Upload() {
         showFailureUploadToast();
       }
     }
-  }, [result, fileBinaryData]);
+  }, [result]);
 
   const handleError = (err: unknown) => {
     if (DocumentPicker.isCancel(err)) {
