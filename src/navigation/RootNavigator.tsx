@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {useAuth} from 'core';
 import {NavigationContainer} from './NavigationContainer';
 import {TabNavigator} from './TabNavigator';
-import {AuthNavigator} from './AuthNavigator';
+import { Login, AppSlider, Upload } from 'screens';
 
 const Stack = createStackNavigator();
 
@@ -24,10 +24,17 @@ export const Root = () => {
         gestureEnabled: false,
         animationTypeForReplace: status === 'signIn' ? 'push' : 'pop',
       }}>
+      
       {status === 'signIn' ? (
-        <Stack.Screen name="App" component={TabNavigator} />
+        <>
+          <Stack.Screen name="App" component={TabNavigator} />
+          <Stack.Screen name="Upload" component={Upload} />
+        </>
       ) : (
-        <Stack.Screen name="Auth" component={AuthNavigator} />
+        <>
+          <Stack.Screen name="AppSlider" component={AppSlider} />
+          <Stack.Screen name="Auth" component={Login} />
+        </>
       )}
     </Stack.Navigator>
   );

@@ -4,6 +4,7 @@ export * from './Text';
 export * from './Pressable';
 export * from './Button';
 export * from './Screen';
+export * from './FullScreen';
 export * from './Input';
 export * from './ErrorHandler';
 export * from './utils';

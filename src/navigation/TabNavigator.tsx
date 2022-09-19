@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Home, Style} from 'screens';
+import {Home, Settings as SettingsScreen} from 'screens';
 import {Home as HomeIcon, Settings} from 'ui';
 import {SvgProps} from 'react-native-svg';
 const Tab = createBottomTabNavigator();
@@ -13,7 +13,7 @@ const getRouteIcon = (
     case 'Home':
       Icon = HomeIcon;
       break;
-    case 'Style':
+    case 'Settings':
       Icon = Settings;
       break;
   }
@@ -29,9 +29,10 @@ export const TabNavigator = () => {
           const Icon = getRouteIcon(route.name);
           return <Icon color={color} />;
         },
+        headerShown: false,
       })}>
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Style" component={Style} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
   );
 };

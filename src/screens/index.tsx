@@ -1,3 +1,5 @@
 export * from './Home';
 export * from './Login';
-export * from './Style';
+export * from './Settings';
+export * from './Slider';
+export * from './Upload';

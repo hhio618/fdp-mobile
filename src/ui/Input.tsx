@@ -35,7 +35,7 @@ export function Input<T>(props: Props<T>) {
   const borderColor = fieldState.invalid
     ? colors.red
     : isFocussed
-    ? colors.secondary
+    ? colors.primary
     : colors.grey2;
   return (
     <View key={`input-${name}`} marginBottom="m">
@@ -43,13 +43,13 @@ export function Input<T>(props: Props<T>) {
         <Text
           variant="label"
           color={
-            fieldState.invalid ? 'red' : isFocussed ? 'secondary' : 'grey1'
+            fieldState.invalid ? 'red' : isFocussed ? 'white' : 'white'
           }>
           {label}
         </Text>
       )}
       <TextInput
-        placeholderTextColor={colors.grey2}
+        placeholderTextColor={colors.grey3}
         style={[
           styles.input,
           {
@@ -81,5 +81,6 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     padding: 2,
     fontSize: 16,
+    color: "whitesmoke",
   },
 });
