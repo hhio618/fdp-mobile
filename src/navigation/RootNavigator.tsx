@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {useAuth} from 'core';
 import {NavigationContainer} from './NavigationContainer';
 import {TabNavigator} from './TabNavigator';
-import { Login, AppSlider, Upload } from 'screens';
+import { Login, AppSlider, Upload, Register } from 'screens';
 
 const Stack = createStackNavigator();
 
@@ -33,7 +33,8 @@ export const Root = () => {
       ) : (
         <>
           <Stack.Screen name="AppSlider" component={AppSlider} />
-          <Stack.Screen name="Auth" component={Login} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
         </>
       )}
     </Stack.Navigator>

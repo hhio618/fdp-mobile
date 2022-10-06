@@ -70,7 +70,7 @@ export const AppSlider = () => {
   let _keyExtractor = (item: Item) => item.title;
 
   function done() {
-    navigation.navigate('Auth');
+    navigation.navigate('Login');
   }
 
   return (
