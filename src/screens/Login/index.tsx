@@ -4,22 +4,21 @@ import {useAuth} from 'core';
 import {useForm} from 'react-hook-form';
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import {useNavigation} from '@react-navigation/native';
 
 type FormData = {
   username: string;
   password: string;
-  url: string;
 };
 
 const schema = yup.object().shape({
   username: yup.string().required().min(4),
   password: yup.string().required().min(6),
-  url: yup.string().required().min(6),
 });
 
 export const Login = () => {
   const {signIn} = useAuth();
-
+  const navigation = useNavigation();
   const {handleSubmit, control} = useForm<FormData>({
     resolver: yupResolver(schema),
   });
@@ -34,13 +33,7 @@ export const Login = () => {
         control={control}
         name="username"
         label="Username"
-        placeholder="FDP username"
-      />
-       <Input
-        control={control}
-        name="url"
-        label="Url"
-        placeholder="https://localhost:6333"
+        placeholder="Username"
       />
       <Input
         control={control}
@@ -53,6 +46,12 @@ export const Login = () => {
         label="Login"
         onPress={handleSubmit(onSubmit)}
         variant="primary"
+      />
+      <Button
+        label="Register"
+        onPress={() => {
+          navigation.navigate('Register');
+        }}
       />
     </Screen>
   );
